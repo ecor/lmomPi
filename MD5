@@ -1,0 +1,11 @@
+82e065a89c15a755f5199c754b50a71e *DESCRIPTION
+7e64bc5c159874cdde2a76524f14f99b *NAMESPACE
+7b1d87bec66b6a9f4cbfde774c3ab9b7 *R/cdf.R
+39baf0ab3dd74465e0cd4a2b106b4f1c *R/lmomPi-package.R
+ded16a7b4de71858f513d4c067461be5 *R/pel.R
+bdfc5d95d154cf910e5ff3ece6bcef7b *R/qua.R
+4da46b0286397a3d1d9ca8c90d77bce2 *inst/script.R
+fa493e25e4047bc72b4d2af8c3409e83 *man/cdf.Rd
+70b1b9a51a3c79013aacdf0a9d5ed06e *man/lmomPi-Package.Rd
+f2f3aa099101f0024b7af170939b65f9 *man/pel.Rd
+b75660f04ae5c1e03eb7e6322ee94fbc *man/qua.Rd
