@@ -6,8 +6,15 @@
 \alias{cdf.spi}
 \title{Generic function for \code{cdf...}: probability distribution fitting with L-Moments.}
 \usage{
-cdf(para, x, probability_distribution_attrname = "probability_distrib",
-  indices = NULL, return.as.spi = FALSE, spi.scale = NA, ...)
+cdf(
+  para,
+  x,
+  probability_distribution_attrname = "probability_distrib",
+  indices = NULL,
+  return.as.spi = FALSE,
+  spi.scale = NA,
+  ...
+)
 
 spi.cdf(x, para, ...)
 

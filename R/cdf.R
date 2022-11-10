@@ -91,7 +91,7 @@ cdf <- function(para,x,probability_distribution_attrname="probability_distrib",i
 	if (length(spi.scale)<1) spi.scale <- as.numeric(NA)
 	if ((class(spi.scale) %in% c("numeric","integer")) & !(is.na(spi.scale))) {
 		
-		x <- as.vector(filter(x,rep(1,spi.scale[1]),sides=1))
+		x <- as.vector(stats::filter(x,rep(1,spi.scale[1]),sides=1))
 	}
 	## END ADDED BY ECOR ON 2017-06-16	
 	
