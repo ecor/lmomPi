@@ -13,6 +13,8 @@ NULL
 #' 
 #' @export
 #' 
+#' @return A vector of quantiles. It is a list of vectors of quantiles in case of several probability parametric distribution functions (i.e. \code{para} is a list and \code{length(para)>1}). 
+#' 
 #' @seealso \code{\link{pel}},\code{\link{quaexp}},\code{\link{quagam}},\code{\link{quagev}},\code{\link{quaglo}},\code{\link{quagpa}},\code{\link{quagno}},\code{\link{quagum}},
 #' 
 #' \code{\link{quakap}},\code{\link{qualn3}},\code{\link{quanor}},\code{\link{quape3}},

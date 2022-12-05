@@ -19,6 +19,11 @@ NULL
 #' @param correction numeric value correction for the 3rd (and higher) L-moment estimation. Default is \code{NULL} , generally it is not used. It is used and suggested to be \code{10^(-10)} in case of a massive function use with \code{lmom=NULL} (e.g. raster cell or zonal statistics). 
 #' @export
 #' @rdname pel 
+#' 
+#' 
+#' @return A numeric vector containing the  parameters of the selected probability distribution. It is a list in case of selection of several probability distributions (i.e. \code{length(distrib)>1}). 
+#'
+#'
 #' @seealso \code{\link{pel...}},\code{\link{pelexp}},\code{\link{pelgam}},\code{\link{pelgev}},\code{\link{pelglo}},\code{\link{pelgpa}},
 #' 
 #' \code{\link{pelgno}},\code{\link{pelgum}},\code{\link{pelkap}},\code{\link{pelln3}},\code{\link{pelnor}},
@@ -47,7 +52,7 @@ NULL
 #'  "nor","pe3","wak","wei")
 #' 
 #'  out_list <- pel(distrib=distrib,lmom=lmom)
-#' 
+#'  \donttest{
 #'  library(rasterList)
 #'  precff <- system.file("map/Mekrou_precipitation.grd", package="rasterList")
 #' 	precs <- stack(precff)
@@ -64,7 +69,7 @@ NULL
 #'  ### example with PEL when x is always 0 or a fixed constant
 #'  xx <- array(0,50)
 #'  out_xx <- pel_x(x=xx,distrib=distrib_prec2)
-#'  
+#'  }
 #' 
 #' 
 #cdfgam 	Gamma distribution
@@ -124,7 +129,7 @@ pel <- function(distrib=c("exp","gam","gev","glo","gpa","gno","gum","kap","ln3",
 	
 	
 	if (is.null(lmom)) {
-		##x33 <<- x ## EC 20221019
+		
 	  
 		lmom <- lmom::samlmu(x,nmom=nmom, sort.data=sort.data, ratios=ratios, trim=trim)
 		
@@ -156,10 +161,7 @@ pel <- function(distrib=c("exp","gam","gev","glo","gpa","gno","gum","kap","ln3",
 		
 		fundist <- get(paste0("pel",distrib))
 		
-		## EC 20170725
 		
-		##lmom00 <<- lmom ## EC 202210 ## https://search.r-project.org/CRAN/refmans/lmomco/html/are.lmom.valid.html
-		## EC 20221025
 		
 		
 		if (!is.na(correction) & ratios) {

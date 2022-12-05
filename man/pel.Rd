@@ -43,6 +43,9 @@ pel_lmom(lmom, ...)
 
 \item{correction}{numeric value correction for the 3rd (and higher) L-moment estimation. Default is \code{NULL} , generally it is not used. It is used and suggested to be \code{10^(-10)} in case of a massive function use with \code{lmom=NULL} (e.g. raster cell or zonal statistics).}
 }
+\value{
+A numeric vector containing the  parameters of the selected probability distribution. It is a list in case of selection of several probability distributions (i.e. \code{length(distrib)>1}).
+}
 \description{
 Generic function for \code{\link{pel...}}: probability distribution fitting with L-Moments
 }
@@ -62,7 +65,7 @@ Generic function for \code{\link{pel...}}: probability distribution fitting with
  "nor","pe3","wak","wei")
 
  out_list <- pel(distrib=distrib,lmom=lmom)
-
+ \donttest{
  library(rasterList)
  precff <- system.file("map/Mekrou_precipitation.grd", package="rasterList")
 	precs <- stack(precff)
@@ -79,7 +82,7 @@ Generic function for \code{\link{pel...}}: probability distribution fitting with
  ### example with PEL when x is always 0 or a fixed constant
  xx <- array(0,50)
  out_xx <- pel_x(x=xx,distrib=distrib_prec2)
- 
+ }
 
 
 }

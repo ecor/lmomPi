@@ -9,9 +9,13 @@ NULL
 #' @param x,para,... L-moments and further parameters for \code{cdf...} and \code{\link{cdf}}
 #' @param probability_distribution_attrname attribute name for probability distribution
 #' @param indices vector of string working as factors or indices, e g. the month names or similar. It must be of the same length of \code{x} or the length equal to 1 other \code{NULL}, if not used. If used, it computes \code{cdf} for each factor. 
-#' @param return.as.spi logical parameter. Default is \code{FALSE}. If it is \code{TRUE} probability value is transormed to a normalized random variable through standard \code{\link{qnorm}}, as for Standard Precipitation Index (SPI) (\url{https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi}).
+#' @param return.as.spi logical parameter. Default is \code{FALSE}. If it is \code{TRUE} probability value is transformed to a normalized random variable through standard \code{\link{qnorm}}, as for Standard Precipitation Index (SPI) (\url{https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi}).
 #' @param spi.scale integer value or \code{NA}. If it greater than 1 \code{x} is filtered with the sum of a generic element of \code{x} and the previous \code{spi.scale-1} ones (e.g. SPI-3,SPI-6, etc. ). Default is \code{NA} (no filtering) which is equivalent to \code{spi.scale=1}.
 #' @export
+#' 
+#' @return A vector of cumulated probability value(s) or SPI-like Gaussianized values. It is a list of vectors in case of several probability parametric distribution functions (i.e. \code{para} is a list and \code{length(para)>1}). 
+#'
+#'
 #' @rdname cdf
 #' @seealso \code{\link{pel}},\code{\link{cdfexp}},\code{\link{cdfgam}},\code{\link{cdfgev}},\code{\link{cdfglo}},
 #' 
@@ -32,6 +36,7 @@ NULL
 #' para_list <- pel(distrib=distrib,lmom=lmom)
 #' cdf_list <- cdf(para=para_list,x=airquality$Ozone)
 #' 
+#'  \donttest{
 #'  library(rasterList)
 #'  precff <- system.file("map/Mekrou_precipitation.grd", package="rasterList")
 #' 	precs <- stack(precff)
@@ -47,7 +52,7 @@ NULL
 #' 	spi_      <- spi.cdf(x=prec_point,indices=month,para=para_vvv)  
 #' 
 #'  ####  
-#'  \dontrun{
+#'
 #'  para_raster <- rasterList(precs,FUN=pel_x,indices=month,distrib=distrib_prec2)
 #'  spi1_raster <- stack(RasterListApply(x=rasterList(precs),para=para_raster,
 #'                 indices=list(month),FUN=spi.cdf))
@@ -61,7 +66,7 @@ NULL
 #' 
 #' ## Comparison with the SPI/SPEI algorithms:  'SPEI::spi' ('SPEI' package)
 #' library(SPEI)
-#' 
+#' \donttest{
 #' data(wichita)
 #' 
 #' distrib_wichita <- 'pe3'
@@ -75,7 +80,7 @@ NULL
 #' spi_wichita_speipkg   <- spi(data=wichita$PRCP,distrib='PearsonIII',scale=spi.scale)
 #' difference <- spi_wichita-spi_wichita_speipkg$fitted
 #' 
-#' 
+#' }
 
 
 

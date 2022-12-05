@@ -11,6 +11,9 @@ qua(para, f, probability_distribution_attrname = "probability_distrib", ...)
 
 \item{probability_distribution_attrname}{attribute name for probability distribution}
 }
+\value{
+A vector of quantiles. It is a list of vectors of quantiles in case of several probability parametric distribution functions (i.e. \code{para} is a list and \code{length(para)>1}).
+}
 \description{
 Generic function for \code{qua...}: probabilily distribution fitting with L-Moments
 }

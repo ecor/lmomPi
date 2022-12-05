@@ -12,7 +12,7 @@
 # Comparison between 'lmomPi::spi.cdf' and 'SPEI::spi' 
 #
 ########
-rm(list=ls())
+#rm(list=ls())
 
 
 library(lmomPi)
