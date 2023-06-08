@@ -4,12 +4,20 @@
 \alias{qua}
 \title{Generic function for \code{qua...}: probabilily distribution fitting with L-Moments}
 \usage{
-qua(para, f, probability_distribution_attrname = "probability_distrib", ...)
+qua(
+  para,
+  f,
+  probability_distribution_attrname = "probability_distrib",
+  distrib = NA,
+  ...
+)
 }
 \arguments{
 \item{f, para, ...}{L-moments and further parameters for \code{qua...}}
 
 \item{probability_distribution_attrname}{attribute name for probability distribution}
+
+\item{distrib}{character string indicating the probability distribution, it can be used in case \code{para} has no attributes. Default is \code{NA} and distribution info are all passed through \code{para}.}
 }
 \value{
 A vector of quantiles. It is a list of vectors of quantiles in case of several probability parametric distribution functions (i.e. \code{para} is a list and \code{length(para)>1}).
@@ -29,6 +37,11 @@ distrib <- c("exp","gam","gev","glo","gpa","gno","gum","kap","ln3","nor",
 para_list <- pel(distrib=distrib,lmom=lmom)
 f <- (1:10)/10
 qua_list <- qua(para=para_list,f=f)
+
+qua_gam <- qua(para=para_list$gam,f=f)
+qua_gam2 <- qua(para=as.vector(para_list$gam),f=f,distrib="gam")
+
+if (any(qua_gam!=qua_gam2,na.rm=TRUE)) stop("Any possible errors after  0.6.3 package updates!") 
 
 
 }

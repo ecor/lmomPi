@@ -27,7 +27,7 @@ pel_x(x, ...)
 pel_lmom(lmom, ...)
 }
 \arguments{
-\item{distrib}{character string incating the probability distribution to fit}
+\item{distrib}{character string indicating the probability distribution to fit}
 
 \item{lmom, ...}{L-moments and further parameters for \code{\link{pel...}}}
 

@@ -9,7 +9,7 @@ NULL
 #' 
 #' @name pel
 #' @title Generic function for \code{\link{pel...}}
-#' @param distrib character string incating the probability distribution to fit 
+#' @param distrib character string indicating the probability distribution to fit 
 #' @param lmom,... L-moments and further parameters for \code{\link{pel...}}
 #' @param probability_distribution_attrname attribute name for probability distribution
 #' @param nmom,sort.data,ratios,trim arguments for \code{\link{samlmu}} (\code{nmom=5} by default). Thay are utilized if argument \code{lmom} is \code{NULL}. 

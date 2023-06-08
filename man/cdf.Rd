@@ -13,6 +13,7 @@ cdf(
   indices = NULL,
   return.as.spi = FALSE,
   spi.scale = NA,
+  distrib = NA,
   ...
 )
 
@@ -30,6 +31,8 @@ cdf.spi(x, para, ...)
 \item{return.as.spi}{logical parameter. Default is \code{FALSE}. If it is \code{TRUE} probability value is transformed to a normalized random variable through standard \code{\link{qnorm}}, as for Standard Precipitation Index (SPI) (\url{https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi}).}
 
 \item{spi.scale}{integer value or \code{NA}. If it greater than 1 \code{x} is filtered with the sum of a generic element of \code{x} and the previous \code{spi.scale-1} ones (e.g. SPI-3,SPI-6, etc. ). Default is \code{NA} (no filtering) which is equivalent to \code{spi.scale=1}.}
+
+\item{distrib}{character string indicating the probability distribution, it can be used in case \code{para} has no attributes. Default is \code{NA} and distribution info are all passed through \code{para}.}
 }
 \value{
 A vector of cumulated probability value(s) or SPI-like Gaussianized values. It is a list of vectors in case of several probability parametric distribution functions (i.e. \code{para} is a list and \code{length(para)>1}).
@@ -48,6 +51,12 @@ distrib <- c("exp","gam","gev","glo","gpa","gno","gum","kap",
 
 para_list <- pel(distrib=distrib,lmom=lmom)
 cdf_list <- cdf(para=para_list,x=airquality$Ozone)
+
+cdf_gam <- cdf(para=para_list$gam,x=airquality$Ozone)
+cdf_gam2 <- cdf(para=para_list$gam,x=airquality$Ozone,distrib="gam")
+
+if (any(cdf_gam!=cdf_gam2,na.rm=TRUE)) stop("Any possible errors after  0.6.3 package updates!") 
+
 
  \donttest{
  library(rasterList)
