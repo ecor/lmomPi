@@ -57,25 +57,28 @@ cdf_gam2 <- cdf(para=para_list$gam,x=airquality$Ozone,distrib="gam")
 
 if (any(cdf_gam!=cdf_gam2,na.rm=TRUE)) stop("Any possible errors after  0.6.3 package updates!") 
 
-
+\donttest{
 
 ## Comparison with the SPI/SPEI algorithms:  'SPEI::spi' ('SPEI' package)
-library(SPEI)
-\donttest{
-data(wichita)
 
-distrib_wichita <- 'pe3'
-spi.scale <- 1
+if (requireNamespace("SPEI",quietly = TRUE)) {
+ library(SPEI)
+ data(wichita)
 
-month_wichita <- sprintf("M\%02d",wichita$MONTH)
-para_whichita  <- pel(x=wichita$PRCP,indices=month_wichita,distrib=distrib_wichita,
+ distrib_wichita <- 'pe3'
+ spi.scale <- 1
+
+ month_wichita <- sprintf("M\%02d",wichita$MONTH)
+ para_whichita  <- pel(x=wichita$PRCP,indices=month_wichita,distrib=distrib_wichita,
 						spi.scale=spi.scale)
-spi_wichita   <- spi.cdf(x=wichita$PRCP,indices=month_wichita,para=para_whichita,
+ spi_wichita   <- spi.cdf(x=wichita$PRCP,indices=month_wichita,para=para_whichita,
 						spi.scale=spi.scale)
-spi_wichita_speipkg   <- spi(data=wichita$PRCP,distrib='PearsonIII',scale=spi.scale)
-difference <- spi_wichita-spi_wichita_speipkg$fitted
+ spi_wichita_speipkg   <- spi(data=wichita$PRCP,distrib='PearsonIII',scale=spi.scale)
+ difference <- spi_wichita-spi_wichita_speipkg$fitted
+}
 
 }
+
 }
 \seealso{
 \code{\link{pel}},\code{\link{cdfexp}},\code{\link{cdfgam}},\code{\link{cdfgev}},\code{\link{cdfglo}},

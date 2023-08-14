@@ -42,26 +42,29 @@ NULL
 #' 
 #' if (any(cdf_gam!=cdf_gam2,na.rm=TRUE)) stop("Any possible errors after  0.6.3 package updates!") 
 #' 
-#' 
+#' \donttest{
 #'
 #' ## Comparison with the SPI/SPEI algorithms:  'SPEI::spi' ('SPEI' package)
-#' library(SPEI)
-#' \donttest{
-#' data(wichita)
+
+#'
+#' if (requireNamespace("SPEI",quietly = TRUE)) {
+#'  library(SPEI)
+#'  data(wichita)
 #' 
-#' distrib_wichita <- 'pe3'
-#' spi.scale <- 1
+#'  distrib_wichita <- 'pe3'
+#'  spi.scale <- 1
 #' 
-#' month_wichita <- sprintf("M%02d",wichita$MONTH)
-#' para_whichita  <- pel(x=wichita$PRCP,indices=month_wichita,distrib=distrib_wichita,
+#'  month_wichita <- sprintf("M%02d",wichita$MONTH)
+#'  para_whichita  <- pel(x=wichita$PRCP,indices=month_wichita,distrib=distrib_wichita,
 #' 						spi.scale=spi.scale)
-#' spi_wichita   <- spi.cdf(x=wichita$PRCP,indices=month_wichita,para=para_whichita,
+#'  spi_wichita   <- spi.cdf(x=wichita$PRCP,indices=month_wichita,para=para_whichita,
 #' 						spi.scale=spi.scale)
-#' spi_wichita_speipkg   <- spi(data=wichita$PRCP,distrib='PearsonIII',scale=spi.scale)
-#' difference <- spi_wichita-spi_wichita_speipkg$fitted
+#'  spi_wichita_speipkg   <- spi(data=wichita$PRCP,distrib='PearsonIII',scale=spi.scale)
+#'  difference <- spi_wichita-spi_wichita_speipkg$fitted
+#' }
 #' 
 #' }
-
+#'
 
 
 cdf <- function(para,x,probability_distribution_attrname="probability_distrib",indices=NULL,return.as.spi=FALSE,spi.scale=NA,distrib=NA,...) {
