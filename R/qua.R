@@ -15,10 +15,10 @@ NULL
 #' 
 #' @return A vector of quantiles. It is a list of vectors of quantiles in case of several probability parametric distribution functions (i.e. \code{para} is a list and \code{length(para)>1}). 
 #' 
-#' @seealso \code{\link{pel}},\code{\link{quaexp}},\code{\link{quagam}},\code{\link{quagev}},\code{\link{quaglo}},\code{\link{quagpa}},\code{\link{quagno}},\code{\link{quagum}},
+#' @seealso \code{\link{pel}},\code{\link[lmom]{quaexp}},\code{\link[lmom]{quagam}},\code{\link[lmom]{quagev}},\code{\link[lmom]{quaglo}},\code{\link[lmom]{quagpa}},\code{\link[lmom]{quagno}},\code{\link[lmom]{quagum}},
 #' 
-#' \code{\link{quakap}},\code{\link{qualn3}},\code{\link{quanor}},\code{\link{quape3}},
-#' \code{\link{quawak}},\code{\link{quawei}} 	
+#' \code{\link[lmom]{quakap}},\code{\link[lmom]{qualn3}},\code{\link[lmom]{quanor}},\code{\link[lmom]{quape3}},
+#' \code{\link[lmom]{quawak}},\code{\link[lmom]{quawei}} 	
 #' 
 #' @importFrom lmom  quagam quagev quaglo quagpa quagno quagum quakap qualn3 quanor quape3 quawak quawei 
 # @importFrom stringr str_sub str_sub<-

@@ -18,9 +18,9 @@ NULL
 #'
 #'
 #' @rdname cdf
-#' @seealso \code{\link{pel}},\code{\link{cdfexp}},\code{\link{cdfgam}},\code{\link{cdfgev}},\code{\link{cdfglo}},
+#' @seealso \code{\link{pel}},\code{\link[lmom]{cdfexp}},\code{\link[lmom]{cdfgam}},\code{\link[lmom]{cdfgev}},\code{\link[lmom]{cdfglo}},
 #' 
-#' \code{\link{cdfgpa}},\code{\link{cdfgno}},\code{\link{cdfgum}},\code{\link{cdfkap}},\code{\link{cdfln3}},\code{\link{cdfnor}},\code{\link{cdfpe3}},\code{\link{cdfwak}},\code{\link{cdfwei}} 	
+#' \code{\link[lmom]{cdfgpa}},\code{\link[lmom]{cdfgno}},\code{\link[lmom]{cdfgum}},\code{\link[lmom]{cdfkap}},\code{\link[lmom]{cdfln3}},\code{\link[lmom]{cdfnor}},\code{\link[lmom]{cdfpe3}},\code{\link[lmom]{cdfwak}},\code{\link[lmom]{cdfwei}} 	
 #' 
 #' @importFrom lmom  cdfgam cdfgev cdfglo cdfgpa cdfgno cdfgum cdfkap cdfln3 cdfnor cdfpe3 cdfwak cdfwei 
 #' @importFrom stats qnorm 

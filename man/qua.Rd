@@ -46,8 +46,8 @@ if (any(qua_gam!=qua_gam2,na.rm=TRUE)) stop("Any possible errors after  0.6.3 pa
 
 }
 \seealso{
-\code{\link{pel}},\code{\link{quaexp}},\code{\link{quagam}},\code{\link{quagev}},\code{\link{quaglo}},\code{\link{quagpa}},\code{\link{quagno}},\code{\link{quagum}},
+\code{\link{pel}},\code{\link[lmom]{quaexp}},\code{\link[lmom]{quagam}},\code{\link[lmom]{quagev}},\code{\link[lmom]{quaglo}},\code{\link[lmom]{quagpa}},\code{\link[lmom]{quagno}},\code{\link[lmom]{quagum}},
 
-\code{\link{quakap}},\code{\link{qualn3}},\code{\link{quanor}},\code{\link{quape3}},
-\code{\link{quawak}},\code{\link{quawei}}
+\code{\link[lmom]{quakap}},\code{\link[lmom]{qualn3}},\code{\link[lmom]{quanor}},\code{\link[lmom]{quape3}},
+\code{\link[lmom]{quawak}},\code{\link[lmom]{quawei}}
 }

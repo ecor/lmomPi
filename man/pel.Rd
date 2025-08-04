@@ -4,7 +4,7 @@
 \alias{pel}
 \alias{pel_x}
 \alias{pel_lmom}
-\title{Generic function for \code{\link{pel...}}}
+\title{Generic function for \code{\link[lmom]{pel...}}}
 \usage{
 pel(
   distrib = c("exp", "gam", "gev", "glo", "gpa", "gno", "gum", "kap", "ln3", "nor",
@@ -29,13 +29,13 @@ pel_lmom(lmom, ...)
 \arguments{
 \item{distrib}{character string indicating the probability distribution to fit}
 
-\item{lmom, ...}{L-moments and further parameters for \code{\link{pel...}}}
+\item{lmom, ...}{L-moments and further parameters for \code{\link[lmom]{pel...}}}
 
 \item{probability_distribution_attrname}{attribute name for probability distribution}
 
 \item{x}{vector containg sample. It is utiled to calculete L-moments in case \code{lmom} is set equal to \code{NULL}.}
 
-\item{nmom, sort.data, ratios, trim}{arguments for \code{\link{samlmu}} (\code{nmom=5} by default). Thay are utilized if argument \code{lmom} is \code{NULL}.}
+\item{nmom, sort.data, ratios, trim}{arguments for \code{\link[lmom]{samlmu}} (\code{nmom=5} by default). Thay are utilized if argument \code{lmom} is \code{NULL}.}
 
 \item{indices}{optional index or tag character vector of the same length of \code{x} used as INDEX for \code{\link{tapply}}. It is used to fit different probability distribution in one sample time series (e. g. months in an year).}
 
@@ -47,7 +47,7 @@ pel_lmom(lmom, ...)
 A numeric vector containing the  parameters of the selected probability distribution. It is a list in case of selection of several probability distributions (i.e. \code{length(distrib)>1}).
 }
 \description{
-Generic function for \code{\link{pel...}}: probability distribution fitting with L-Moments
+Generic function for \code{\link[lmom]{pel...}}: probability distribution fitting with L-Moments
 }
 \details{
 \code{pel_x} and \code{pel_lmom} are wrapper functions of \code{\link{pel}} whose first argument is \code{x} or \code{lmom} respectively.
@@ -69,11 +69,11 @@ Generic function for \code{\link{pel...}}: probability distribution fitting with
 
 }
 \seealso{
-\code{\link{pel...}},\code{\link{pelexp}},\code{\link{pelgam}},\code{\link{pelgev}},\code{\link{pelglo}},\code{\link{pelgpa}},
+\code{\link[lmom]{pel...}},\code{\link[lmom]{pelexp}},\code{\link[lmom]{pelgam}},\code{\link[lmom]{pelgev}},\code{\link[lmom]{pelglo}},\code{\link[lmom]{pelgpa}},
 
-\code{\link{pelgno}},\code{\link{pelgum}},\code{\link{pelkap}},\code{\link{pelln3}},\code{\link{pelnor}},
+\code{\link[lmom]{pelgno}},\code{\link[lmom]{pelgum}},\code{\link[lmom]{pelkap}},\code{\link[lmom]{pelln3}},\code{\link[lmom]{pelnor}},
 
-\code{\link{pelpe3}},\code{\link{pelwak}},\code{\link{pelwei}},
+\code{\link[lmom]{pelpe3}},\code{\link[lmom]{pelwak}},\code{\link[lmom]{pelwei}},
 
 \code{\link{cdf}},\code{\link{qua}}
 }
