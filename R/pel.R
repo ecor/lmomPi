@@ -17,6 +17,8 @@ NULL
 #' @param indices optional index or tag character vector of the same length of \code{x} used as INDEX for \code{\link{tapply}}. It is used to fit different probability distribution in one sample time series (e. g. months in an year). 
 #' @param spi.scale integer value or \code{NA}. If it is greater than 1, \code{x} is filtered with the sum of a generic element of \code{x} and the previous \code{spi.scale-1} ones (e.g. SPI-3,SPI-6, etc. ). Default is \code{NA} (no filtering) which is equivalent to \code{spi.scale=1}.
 #' @param correction numeric value correction for the 3rd (and higher) L-moment estimation. Default is \code{NULL} , generally it is not used. It is used and suggested to be \code{10^(-10)} in case of a massive function use with \code{lmom=NULL} (e.g. raster cell or zonal statistics). 
+#' @param check_lmom_validity logical. Default is \code{FALSE}. If it is \code{TRUE}, L-moments are checked through \code{\link{are.lmoms.valid}} 
+#' 
 #' @export
 #' @rdname pel 
 #' 
@@ -68,7 +70,7 @@ NULL
 #cdfwei 	Weibull distribution
 
 pel <- function(distrib=c("exp","gam","gev","glo","gpa","gno","gum","kap","ln3","nor","pe3","wak","wei")
-,lmom=NULL,probability_distribution_attrname="probability_distrib",x=NULL,nmom=5, sort.data=TRUE, ratios=sort.data, trim=0,indices=NULL,spi.scale=NA,correction=NULL,...) {
+,lmom=NULL,probability_distribution_attrname="probability_distrib",x=NULL,nmom=5, sort.data=TRUE, ratios=sort.data, trim=0,indices=NULL,spi.scale=NA,correction=NULL,check_lmom_validity=FALSE,...) {
   
   ##correction_global <<- correction
 	out <- try(stop("Generic Error!!"),silent=TRUE)
@@ -96,7 +98,7 @@ pel <- function(distrib=c("exp","gam","gev","glo","gpa","gno","gum","kap","ln3",
 				
 				
 			out <- tapply(X=x,FUN=pelxx,INDEX=indices,distrib=distrib
-					,lmom=lmom,probability_distribution_attrname=probability_distribution_attrname,nmom=nmom, sort.data=sort.data, ratios=sort.data, trim=trim,indices=NULL,correction=correction,...) 
+					,lmom=lmom,probability_distribution_attrname=probability_distribution_attrname,nmom=nmom, sort.data=sort.data, ratios=sort.data, trim=trim,indices=NULL,correction=correction,check_lmom_validity=check_lmom_validity,...) 
 				
 			return(out)
 				
@@ -114,7 +116,16 @@ pel <- function(distrib=c("exp","gam","gev","glo","gpa","gno","gum","kap","ln3",
 		
 	  
 		lmom <- lmom::samlmu(x,nmom=nmom, sort.data=sort.data, ratios=ratios, trim=trim)
-		
+	
+	}
+	### CHECK L_MOM CONSISTENCY 
+	if (check_lmom_validity) {
+	
+	  if (!are.lmoms.valid(lmom)) lmom[] <- as.numeric(NA)
+	 
+	  
+	} else if (!are.lmoms.valid(lmom)) {
+	  ### DO NOTHING
 	}
 	
 	

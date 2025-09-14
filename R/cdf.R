@@ -45,7 +45,7 @@ NULL
 #' \donttest{
 #'
 #' ## Comparison with the SPI/SPEI algorithms:  'SPEI::spi' ('SPEI' package)
-
+#'
 #'
 #' if (requireNamespace("SPEI",quietly = TRUE)) {
 #'  library(SPEI)
@@ -56,12 +56,16 @@ NULL
 #' 
 #'  month_wichita <- sprintf("M%02d",wichita$MONTH)
 #'  para_whichita  <- pel(x=wichita$PRCP,indices=month_wichita,distrib=distrib_wichita,
-#' 						spi.scale=spi.scale)
+#' 						spi.scale=spi.scale,check_lmom_validity=TRUE)
 #'  spi_wichita   <- spi.cdf(x=wichita$PRCP,indices=month_wichita,para=para_whichita,
 #' 						spi.scale=spi.scale)
 #'  spi_wichita_speipkg   <- spi(data=wichita$PRCP,distrib='PearsonIII',scale=spi.scale)
 #'  difference <- spi_wichita-spi_wichita_speipkg$fitted
 #' }
+#' 
+#' 
+#' 
+#' 
 #' 
 #' }
 #'
