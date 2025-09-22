@@ -1,5 +1,7 @@
+#'
 #' lmomPi: (Precipitation) Frequency Analysis and Variability with L-Moments from lmom
 #'
+#' 
 #' @description
 #' This package contains wrapper functions from the 'lmom' package:
 #' \code{\link{cdf}}: generic distribution function;  

@@ -12,6 +12,7 @@ Description: It is an extension of 'lmom' R package: 'pel...()','cdf...()',qua..
     Precipitation Index, see <https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi> and <http://spei.csic.es/>) for multiple time series or spatially gridded values. 
 Version: 0.6.8
 Date: 2025-09-11
+URL: https://github.com/ecor/lmomPi
 Repository: CRAN
 Depends: R(>= 3.0.1),lmom,stringr
 Suggests: SPEI
