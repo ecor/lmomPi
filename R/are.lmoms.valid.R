@@ -8,7 +8,9 @@ NULL
 
 #' @param lmom vector of L-moments 
 #' @param clean logical if it is \code{TRUE} (default) clean \code{lmom}'s names 
-#'
+#' @param return_numeric logical if it is \code{TRUE} L-moments corrected are returned instead of a boolean value.
+#' 
+#' 
 #' @export
 #' 
 #' @return logical value indicating if all of these conditions are verified:
@@ -37,8 +39,8 @@ NULL
 #' lmom <- samlmu(airquality$Ozone, 6)
 #' are.lmoms.valid(lmom = lmom)
 #' 
+#' are.lmoms.valid(lmom = lmom,return_numeric=TRUE)
 #' 
-#' 
 
 
 
@@ -46,14 +48,18 @@ NULL
 
 
 
-are.lmoms.valid <- function (lmom,clean=TRUE) {
+are.lmoms.valid <- function (lmom,clean=TRUE,return_numeric=FALSE) {
   #####names_lmom=c("l_1","l_2","t_3","t_4")
+  
+  out <- FALSE
+  if (return_numeric) out <- NULL
+  
   if (is.null(lmom)) {
-    return(FALSE)
+    return(out)
   } else if (length(lmom) <3) {
-    return(FALSE)
+    return(out)
   } else if (any(is.na(lmom))) {
-    return(FALSE)
+    return(out)
   }
   
   
@@ -65,7 +71,7 @@ are.lmoms.valid <- function (lmom,clean=TRUE) {
     
   }
   
-  if (!("l_1" %in% names(lmom)))  return(FALSE)
+  if (!("l_1" %in% names(lmom)))  return(out)
     
  
   if (!("l_2" %in% names(lmom))) {
@@ -89,18 +95,21 @@ are.lmoms.valid <- function (lmom,clean=TRUE) {
   nnn <- c(sprintf("l_%d",1:2),sprintf("t_%d",3:length(lmom)))
   lmom <- lmom[names(lmom) %in% nnn] 
   lmom <- lmom[sort(names(lmom))]
-  if (!is.finite(lmom[["l_1"]])) return(FALSE)
-  if (!is.finite(lmom[["l_2"]])) return(FALSE)
-  if (!(lmom[["l_2"]]>=0)) return(FALSE)
+  if (!is.finite(lmom[["l_1"]])) return(out)
+  if (!is.finite(lmom[["l_2"]])) return(out)
+  if (!(lmom[["l_2"]]>=0)) return(out)
   for (it in sprintf("t_%d",3:length(lmom))) {
-      if (!(abs(lmom[[it]])<1)) return(FALSE)  
+      if (!(abs(lmom[[it]])<1)) return(out)  
   }  
   if (all(c("t_4","t_3") %in% names(lmom)))  {
     condt3t4 <- ((5*lmom[["t_3"]]^2-1)/4)<=lmom[["t_4"]]
-    if (!condt3t4) return(FALSE)
+    if (!condt3t4) return(out)
     
   } 
   
+  out <- TRUE
+  if (return_numeric) out <- lmom
   
-  return(TRUE)
+  
+  return(out)
 }

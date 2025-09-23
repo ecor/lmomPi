@@ -4,12 +4,14 @@
 \alias{are.lmoms.valid}
 \title{Validate L-moment Constraints}
 \usage{
-are.lmoms.valid(lmom, clean = TRUE)
+are.lmoms.valid(lmom, clean = TRUE, return_numeric = FALSE)
 }
 \arguments{
 \item{lmom}{vector of L-moments}
 
 \item{clean}{logical if it is \code{TRUE} (default) clean \code{lmom}'s names}
+
+\item{return_numeric}{logical if it is \code{TRUE} L-moments corrected are returned instead of a boolean value.}
 }
 \value{
 logical value indicating if all of these conditions are verified:
@@ -34,7 +36,7 @@ data(airquality)
 lmom <- samlmu(airquality$Ozone, 6)
 are.lmoms.valid(lmom = lmom)
 
-
+are.lmoms.valid(lmom = lmom,return_numeric=TRUE)
 
 }
 \references{
