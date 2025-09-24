@@ -41,6 +41,13 @@ NULL
 #' 
 #' are.lmoms.valid(lmom = lmom,return_numeric=TRUE)
 #' 
+#' lmoml <- samlmu(airquality$Ozone, 6,ratio=FALSE)
+#' 
+#' are.lmoms.valid(lmom = lmoml)
+#' 
+#' are.lmoms.valid(lmom = lmoml,return_numeric=TRUE)
+#' 
+#' 
 
 
 
@@ -85,7 +92,7 @@ are.lmoms.valid <- function (lmom,clean=TRUE,return_numeric=FALSE) {
   }  
   iii <- (1:length(lmom))[-c(1,2)]
   lnn <- sprintf("l_%d",iii)
-  lnn <- lnn[lnn]
+  ##lnn <- lnn[lnn]
   iic <- which(names(lmom) %in% lnn)
   if (length(iic)>0) {
     lmom[iic] <- lmom[iic]/lmom[["l_2"]]

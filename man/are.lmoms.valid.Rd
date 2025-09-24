@@ -38,6 +38,13 @@ are.lmoms.valid(lmom = lmom)
 
 are.lmoms.valid(lmom = lmom,return_numeric=TRUE)
 
+lmoml <- samlmu(airquality$Ozone, 6,ratio=FALSE)
+
+are.lmoms.valid(lmom = lmoml)
+
+are.lmoms.valid(lmom = lmoml,return_numeric=TRUE)
+
+
 }
 \references{
 Hosking, J.R.M. and Wallis, J.R. (1997). \emph{Regional Frequency Analysis: An Approach Based on L-Moments}. Cambridge University Press. \doi{10.1017/CBO9780511529443}
