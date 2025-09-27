@@ -9,6 +9,9 @@ NULL
 #' @param lmom vector of L-moments 
 #' @param clean logical if it is \code{TRUE} (default) clean \code{lmom}'s names 
 #' @param return_numeric logical if it is \code{TRUE} L-moments corrected are returned instead of a boolean value.
+#' @param condt3t4 logical if \code{TRUE} condition on \code{t_3} and \code{t_4} is applied.
+#' @param condtt3 logical if \code{TRUE} condition on \code{t} and \code{t_3} is applied (only for a distribution that takes positive values, p.24 ref).
+#' 
 #' 
 #' 
 #' @export
@@ -19,7 +22,8 @@ NULL
 #'   \item \eqn{|\tau_3| < 1} (L-skewness must lie within \eqn{(-1, 1)})
 #'   \item \eqn{|\tau_i| < 1} (i-th L-moment ratio must lie within \eqn{(-1, 1)} for \code{i>3})
 #'   \item \eqn{\lambda_1} and \eqn{\lambda_2} must be finite
-#'   \item \eqn{\frac{5\tau_3^2 - 1 }{4} \leq \tau_4 < 1} is checked for theoretical consistency
+#'   \item \eqn{\frac{5\tau_3^2 - 1 }{4} \leq \tau_4 < 1} is verified for theoretical consistency
+#'   \item \eqn{2\tau-1 \leq \tau_3 < 1} is verified for theoretical consistency (only for a distribution that takes positive values, p.24 ref)
 #' }
 #'
 #'
@@ -44,10 +48,10 @@ NULL
 #' lmoml <- samlmu(airquality$Ozone, 6,ratio=FALSE)
 #' 
 #' are.lmoms.valid(lmom = lmoml)
-#' 
+#' are.lmoms.valid(lmom = lmoml,condtt3=TRUE)
 #' are.lmoms.valid(lmom = lmoml,return_numeric=TRUE)
+#' are.lmoms.valid(lmom = lmoml,return_numeric=TRUE,condtt3=TRUE)
 #' 
-#' 
 
 
 
@@ -55,7 +59,7 @@ NULL
 
 
 
-are.lmoms.valid <- function (lmom,clean=TRUE,return_numeric=FALSE) {
+are.lmoms.valid <- function (lmom,clean=TRUE,return_numeric=FALSE,condt3t4=TRUE,condtt3=FALSE) {
   #####names_lmom=c("l_1","l_2","t_3","t_4")
   
   out <- FALSE
@@ -72,6 +76,7 @@ are.lmoms.valid <- function (lmom,clean=TRUE,return_numeric=FALSE) {
   
   
   lmom <- unlist(lmom)
+ 
   if (clean) {
     
     names(lmom) <- gsub("\\([^)]*\\)", "", names(lmom))
@@ -100,20 +105,32 @@ are.lmoms.valid <- function (lmom,clean=TRUE,return_numeric=FALSE) {
   } 
   ###
   nnn <- c(sprintf("l_%d",1:2),sprintf("t_%d",3:length(lmom)))
-  lmom <- lmom[names(lmom) %in% nnn] 
+  ###
+  
+  
+  
+  lmom <- lmom[which(names(lmom) %in% nnn)] 
+  
   lmom <- lmom[sort(names(lmom))]
   if (!is.finite(lmom[["l_1"]])) return(out)
+
+  
   if (!is.finite(lmom[["l_2"]])) return(out)
   if (!(lmom[["l_2"]]>=0)) return(out)
+  
   for (it in sprintf("t_%d",3:length(lmom))) {
       if (!(abs(lmom[[it]])<1)) return(out)  
   }  
-  if (all(c("t_4","t_3") %in% names(lmom)))  {
-    condt3t4 <- ((5*lmom[["t_3"]]^2-1)/4)<=lmom[["t_4"]]
+  if (all(c("t_4","t_3") %in% names(lmom)) & condt3t4)  {
+    condt3t4 <- ((5*lmom[["t_3"]]^2-1)/4)<=lmom[["t_4"]]  | !condt3t4
     if (!condt3t4) return(out)
     
   } 
-  
+  if (all(c("l_1","l_2","t_3") %in% names(lmom)) & condtt3){
+    condtt3 <- 2*lmom[["l_2"]]/lmom[["l_1"]]-1<=lmom[["t_3"]]
+    if (condtt3) return(out)
+    
+  }
   out <- TRUE
   if (return_numeric) out <- lmom
   

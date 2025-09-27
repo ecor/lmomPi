@@ -18,7 +18,7 @@ NULL
 #' @param spi.scale integer value or \code{NA}. If it is greater than 1, \code{x} is filtered with the sum of a generic element of \code{x} and the previous \code{spi.scale-1} ones (e.g. SPI-3,SPI-6, etc. ). Default is \code{NA} (no filtering) which is equivalent to \code{spi.scale=1}.
 #' @param correction numeric value correction for the 3rd (and higher) L-moment estimation. Default is \code{NULL} , generally it is not used. It is used and suggested to be \code{10^(-10)} in case of a massive function use with \code{lmom=NULL} (e.g. raster cell or zonal statistics). 
 #' @param check_lmom_validity logical. Default is \code{FALSE}. If it is \code{TRUE}, L-moments are checked through \code{\link{are.lmoms.valid}} 
-#' 
+#' @param condt3t4 argument for \code{\link{are.lmoms.valid}} in case \code{are.lmoms.valid==TRUE}
 #' @export
 #' @rdname pel 
 #' 
@@ -70,7 +70,7 @@ NULL
 #cdfwei 	Weibull distribution
 
 pel <- function(distrib=c("exp","gam","gev","glo","gpa","gno","gum","kap","ln3","nor","pe3","wak","wei")
-,lmom=NULL,probability_distribution_attrname="probability_distrib",x=NULL,nmom=5, sort.data=TRUE, ratios=sort.data, trim=0,indices=NULL,spi.scale=NA,correction=NULL,check_lmom_validity=FALSE,...) {
+,lmom=NULL,probability_distribution_attrname="probability_distrib",x=NULL,nmom=5, sort.data=TRUE, ratios=sort.data, trim=0,indices=NULL,spi.scale=NA,correction=NULL,check_lmom_validity=FALSE,condt3t4=TRUE,...) {
   
   ##correction_global <<- correction
 	out <- try(stop("Generic Error!!"),silent=TRUE)
@@ -121,7 +121,7 @@ pel <- function(distrib=c("exp","gam","gev","glo","gpa","gno","gum","kap","ln3",
 	### CHECK L_MOM CONSISTENCY 
 	if (check_lmom_validity) {
 	
-	  if (!are.lmoms.valid(lmom)) lmom[] <- as.numeric(NA)
+	  if (!are.lmoms.valid(lmom,condt3t4=condt3t4)) lmom[] <- as.numeric(NA)
 	 
 	  
 	} else if (!are.lmoms.valid(lmom)) {

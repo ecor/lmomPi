@@ -4,7 +4,13 @@
 \alias{are.lmoms.valid}
 \title{Validate L-moment Constraints}
 \usage{
-are.lmoms.valid(lmom, clean = TRUE, return_numeric = FALSE)
+are.lmoms.valid(
+  lmom,
+  clean = TRUE,
+  return_numeric = FALSE,
+  condt3t4 = TRUE,
+  condtt3 = FALSE
+)
 }
 \arguments{
 \item{lmom}{vector of L-moments}
@@ -12,6 +18,10 @@ are.lmoms.valid(lmom, clean = TRUE, return_numeric = FALSE)
 \item{clean}{logical if it is \code{TRUE} (default) clean \code{lmom}'s names}
 
 \item{return_numeric}{logical if it is \code{TRUE} L-moments corrected are returned instead of a boolean value.}
+
+\item{condt3t4}{logical if \code{TRUE} condition on \code{t_3} and \code{t_4} is applied.}
+
+\item{condtt3}{logical if \code{TRUE} condition on \code{t} and \code{t_3} is applied (only for a distribution that takes positive values, p.24 ref).}
 }
 \value{
 logical value indicating if all of these conditions are verified:
@@ -20,7 +30,8 @@ logical value indicating if all of these conditions are verified:
   \item \eqn{|\tau_3| < 1} (L-skewness must lie within \eqn{(-1, 1)})
   \item \eqn{|\tau_i| < 1} (i-th L-moment ratio must lie within \eqn{(-1, 1)} for \code{i>3})
   \item \eqn{\lambda_1} and \eqn{\lambda_2} must be finite
-  \item \eqn{\frac{5\tau_3^2 - 1 }{4} \leq \tau_4 < 1} is checked for theoretical consistency
+  \item \eqn{\frac{5\tau_3^2 - 1 }{4} \leq \tau_4 < 1} is verified for theoretical consistency
+  \item \eqn{2\tau-1 \leq \tau_3 < 1} is verified for theoretical consistency (only for a distribution that takes positive values, p.24 ref)
 }
 }
 \description{
@@ -41,9 +52,9 @@ are.lmoms.valid(lmom = lmom,return_numeric=TRUE)
 lmoml <- samlmu(airquality$Ozone, 6,ratio=FALSE)
 
 are.lmoms.valid(lmom = lmoml)
-
+are.lmoms.valid(lmom = lmoml,condtt3=TRUE)
 are.lmoms.valid(lmom = lmoml,return_numeric=TRUE)
-
+are.lmoms.valid(lmom = lmoml,return_numeric=TRUE,condtt3=TRUE)
 
 }
 \references{

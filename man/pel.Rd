@@ -20,6 +20,7 @@ pel(
   spi.scale = NA,
   correction = NULL,
   check_lmom_validity = FALSE,
+  condt3t4 = TRUE,
   ...
 )
 
@@ -45,6 +46,8 @@ pel_lmom(lmom, ...)
 \item{correction}{numeric value correction for the 3rd (and higher) L-moment estimation. Default is \code{NULL} , generally it is not used. It is used and suggested to be \code{10^(-10)} in case of a massive function use with \code{lmom=NULL} (e.g. raster cell or zonal statistics).}
 
 \item{check_lmom_validity}{logical. Default is \code{FALSE}. If it is \code{TRUE}, L-moments are checked through \code{\link{are.lmoms.valid}}}
+
+\item{condt3t4}{argument for \code{\link{are.lmoms.valid}} in case \code{are.lmoms.valid==TRUE}}
 }
 \value{
 A numeric vector containing the  parameters of the selected probability distribution. It is a list in case of selection of several probability distributions (i.e. \code{length(distrib)>1}).
